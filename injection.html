@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Testing load/unload, switch tracking</title>
+	</head>
+	<body>
+		<h1>Testing load/unload, switch tracking</h1>
+		<a href="http://www.this-page-intentionally-left-blank.org/">http://www.this-page-intentionally-left-blank.org/</a><br>
+		<a href="http://www.e-try.com/black.htm">http://www.e-try.com/black.htm</a><br>
+		<div id="lipsum">
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis turpis id odio fermentum blandit id quis neque. Morbi accumsan varius odio vel tincidunt. Fusce vitae ante eu ex elementum rutrum. Nulla facilisi. In hac habitasse platea dictumst. Nullam et tortor orci. Maecenas porttitor accumsan sodales. Aliquam purus sapien, semper in justo at, efficitur ultrices lectus. Vivamus laoreet risus at sem ullamcorper vehicula. Nulla gravida, nulla quis fringilla tincidunt, tellus tellus placerat nisl, eget mattis tortor orci sed risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec malesuada pellentesque metus, nec tincidunt nunc egestas sed. Donec scelerisque laoreet lorem eget convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam sollicitudin metus nec dictum aliquam. Pellentesque vel tempus metus.
+			</p>
+			<p>
+			Nunc lacinia justo volutpat, tempus sapien a, dictum erat. Nullam sit amet auctor orci. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris viverra velit nec nunc sollicitudin, maximus aliquet leo feugiat. Curabitur magna massa, gravida et vulputate eu, ornare eget lectus. Praesent malesuada elit nec ligula blandit, vitae fringilla tortor tristique. Nam ut hendrerit nibh, in ullamcorper augue. In quis viverra mi. Quisque vitae ante tellus. Vestibulum semper dignissim odio hendrerit congue. Curabitur id quam purus.
+			</p>
+			<p>
+			Nulla cursus augue a varius sollicitudin. Proin eget fermentum massa. Morbi ut ante non nunc tristique elementum. Duis sit amet venenatis nisi, sed fermentum leo. Duis semper dictum nulla, non posuere sem. Etiam non neque libero. Nam vitae pretium diam.
+			</p>
+			<p>
+			In elementum euismod mauris, sit amet fermentum nulla rutrum a. Nunc efficitur, turpis sodales viverra consequat, eros ex fermentum velit, ut facilisis lacus eros eget turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent in tincidunt orci. Curabitur sodales elementum turpis, a commodo nibh convallis sed. Cras bibendum arcu eget libero lacinia, eget congue ante vulputate. Mauris facilisis risus vel ipsum rhoncus, non dignissim arcu dignissim. Nulla tincidunt gravida ex dapibus tincidunt. Morbi ex leo, euismod non scelerisque quis, hendrerit non arcu. Nam finibus ornare odio id commodo.
+			</p>
+			<p>
+			Nunc luctus pulvinar suscipit. Nam eleifend nunc nec gravida convallis. Sed luctus tortor non est dictum pharetra. Pellentesque non scelerisque mi, ut dignissim sem. Nunc nibh tellus, dictum quis orci eu, accumsan pellentesque velit. Cras semper blandit consequat. Nunc ullamcorper erat arcu, id laoreet felis condimentum sit amet. Vivamus euismod et orci eget laoreet. Praesent vehicula odio vitae nunc venenatis, eget vestibulum neque porttitor. Mauris tempor fermentum lorem vehicula volutpat. Duis convallis iaculis pharetra. Suspendisse porttitor euismod ullamcorper. Aliquam tristique orci velit, sed gravida augue gravida interdum. Suspendisse lacus arcu, convallis in dui et, scelerisque tempus mi.
+			</p>
+		</div>	
+		<script type="text/javascript">
+			window.onload = function(){
+				var url = "https://httpbin.org/get";
+				xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("POST", url);
+				xmlhttp.send('event=load&url='+window.location.href);
+				window.addEventListener("beforeunload", function () {
+					xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("POST", url);
+					xmlhttp.send('event=unload&url='+window.location.href);
+				});
+				window.addEventListener("blur", function () {
+					xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("POST", url);
+					xmlhttp.send('event=pause&url='+window.location.href);
+				});
+				window.addEventListener("focus", function () {
+					xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("POST", url);
+					xmlhttp.send('event=start&url='+window.location.href);
+				});
+			};
+		</script>
+	</body>
+</html>
+

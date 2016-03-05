@@ -1,0 +1,24 @@
+<!-- this code to be added to the end of html pages, to capture (page load), tab switching, page unload   -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+(function($) {
+	$(document).ready(function() {
+		// capture tab or window close
+		$(window).bind('beforeunload', function(){
+			alert('leave?');
+		});
+		// capture switch away from tab
+		$(window).on("blur", function() {
+		   // do whatever you want
+		});	
+		// capture switch back to tab
+		$(window).on("focus", function() {
+		   // do whatever you want
+		});	
+
+	});
+})(jQuery);?
+
+
+</script>
