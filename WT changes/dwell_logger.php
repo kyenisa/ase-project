@@ -2,6 +2,8 @@
 
 	include_once("include/config.php");
 	include_once "lib/lib.php";
+	
+	header('Access-Control-Allow-Origin: *');
 	$dbt = db_conn("traffic");
 	
 	if (empty($_POST)) {
