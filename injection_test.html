@@ -25,24 +25,22 @@
 		</div>	
 		<script type="text/javascript">
 			window.onload = function(){
-				var url = "https://httpbin.org/get";
-				xmlhttp = new XMLHttpRequest();
-				xmlhttp.open("POST", url);
-				xmlhttp.send('event=load&url='+window.location.href);
-				window.addEventListener("beforeunload", function () {
-					xmlhttp = new XMLHttpRequest();
-					xmlhttp.open("POST", url);
-					xmlhttp.send('event=unload&url='+window.location.href);
-				});
+				var url = "http://10.1.2.93/dwell_logger.php";
+				var start = new Date().getTime();
+				var dwelltime = 0;
 				window.addEventListener("blur", function () {
-					xmlhttp = new XMLHttpRequest();
-					xmlhttp.open("POST", url);
-					xmlhttp.send('event=pause&url='+window.location.href);
+					dwelltime = (new Date().getTime() - start) + dwelltime;
 				});
 				window.addEventListener("focus", function () {
+					start = new Date().getTime();
+				});
+				window.addEventListener("beforeunload", function () {
+					dwelltime = (new Date().getTime() - start) + dwelltime;
+					dwelltime = Math.round(dwelltime / 1000); // convert from ms to s
 					xmlhttp = new XMLHttpRequest();
 					xmlhttp.open("POST", url);
-					xmlhttp.send('event=start&url='+window.location.href);
+					xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xmlhttp.send("dwell=" + dwelltime + "&url="+window.location.href);
 				});
 			};
 		</script>
