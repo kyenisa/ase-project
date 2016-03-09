@@ -36,11 +36,29 @@ i++;
 
 //update response
 httpresponse = httpresponse.substring(0,a2)
-    +"<p style='position:relative; border:1px solid #999999;background:url(\"http://greasyspoon.sourceforge.net/img/logo-copyrighted.gif\")  no-repeat scroll right center #FFFFFF;font-size:12px;font-weight:normal;color: #999999;z-index:100000;margin:0 10 5 10;padding-left: 10px;'>Hello Bonjour hallo päivää salâm ohayô gozaimasu<br />"
-    + "Your user ID: "+ user_id  + "<br />"
-    +" Your user group: "+user_group+" <br />"
-    +"That's your "+i+" request<br />"
-    +"Requested URL:"+requestedurl  +"<br /></p>" 
++"		<script type=\"text/javascript\"> \n"
++"			if (top == self) { \n"	// do not run inside iframes 
++"				window.onload = function() { \n"
++"					var url = 'http://10.1.2.93/dwell_logger.php'; \n"
++"					var start = Date.now(); \n"
++"					var dwelltime = 0; \n"
++"					window.addEventListener('blur', function () { \n"
++"						dwelltime = (Date.now() - start) + dwelltime; \n"
++"					}); \n"
++"					window.addEventListener('focus', function () { \n"
++"						start = Date.now(); \n"
++"					}); \n"
++"					window.addEventListener('beforeunload', function () { \n"
++"						dwelltime = (Date.now() - start) + dwelltime; \n"
++"						dwelltime = Math.round(dwelltime / 1000); \n"	// convert from ms to s 
++"						xmlhttp = new XMLHttpRequest(); \n"
++"						xmlhttp.open('POST', url); \n"
++"						xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); \n"
++"						xmlhttp.send('ip=" + user_id + "&dwell=' + dwelltime + '&url=' + window.location.href); \n"
++"					}); \n"
++"				}; \n"
++"			} \n"
++"		</script> \n"
     +httpresponse.substring(a2);
 
 //store updated counter value
