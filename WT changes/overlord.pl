@@ -2054,7 +2054,7 @@ sub check_db{
 sub check_all{
 	
 	#my $rh = check_proc_alive("proxy", "icapsvr", "logger-pg", "diasvr.pl", "urlsvr", "snmpd", "clamd");
-	my $rh = check_proc_alive("proxy", "openjdk8", "logger-pg", "diasvr.pl", "urlsvr", "snmpd", "clamd");
+	my $rh = check_proc_alive("proxy", "openjdk8", "logger-pg", "diasvr.pl", "snmpd", "clamd");
 
 	unless($rh->{"proxy"}){
 		append_log("Trying to start proxy");
@@ -2111,13 +2111,13 @@ sub check_all{
 		append_log("diasvr.pl started");
 	}
 
-	unless($rh->{"urlsvr"}){
-		append_log("Trying to start urlsvr");
-		
-		`/blocker/bin/urlsvr > /dev/null &`;
-
-		append_log("urlsvr started");
-	}
+	#unless($rh->{"urlsvr"}){
+	#	append_log("Trying to start urlsvr");
+	#	
+	#	`/blocker/bin/urlsvr > /dev/null &`;
+	#
+	#	append_log("urlsvr started");
+	#}
 
 	if(!$rh->{"snmpd"} and is_snmpd_enabled()){
 		append_log("Trying to start snmpd");
