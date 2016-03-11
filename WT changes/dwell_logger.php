@@ -4,6 +4,10 @@
 	include_once "lib/lib.php";
 	
 	header('Access-Control-Allow-Origin: *');
+	
+	if (empty($_POST)) {
+		parse_str(file_get_contents('php://input'), $_POST);
+	}
 	$dbt = db_conn("traffic");
 	
 	if (empty($_POST)) {
